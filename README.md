@@ -43,10 +43,13 @@ single-file interactive Fang-Yuan (square-and-circle) map you can open offline.
 | **0** | third-party dependencies for the core algorithms |
 
 The central claim — **64 hexagrams ≅ 6-dimensional hypercube** — is checked in
-[`docs/数理可行性验证报告.md`](docs/数理可行性验证报告.md) as 12 separate
+[`docs/en/mathematical-verification.md`](docs/en/mathematical-verification.md)
+(12 propositions, English) as 12 separate
 assertions, including: bijection to {0,1}⁶; cuo as antipode; changed line as a
 Hamming-1 neighbor; the identity `dot = 6 − 2·hamming`; cuo as an involution;
 and the hypercube graph having 192 symmetric edges.
+The Chinese original — the source of truth — is
+[`docs/数理可行性验证报告.md`](docs/数理可行性验证报告.md).
 
 ---
 
@@ -134,7 +137,9 @@ fangyuan-yijing/
 │   ├── l3_traps.jsonl          Hallucination / logic-consistency traps
 │   └── *_manifest.json         Dataset manifests
 ├── docs/                       Research and decision reports (Chinese)
-│   ├── 数理可行性验证报告.md     The 12 falsifiable propositions
+│   ├── en/                     English editions
+│   │   └── mathematical-verification.md  The 12 propositions, in English
+│   ├── 数理可行性验证报告.md     The 12 falsifiable propositions (source of truth)
 │   ├── 易经大模型-训练方案-v1.md Four-axis training plan, capability limits, gates
 │   ├── 先天方圆图学习与应用报告.md Square=space / circle=time, how it plugs in
 │   └── ...                     feasibility, audits, fixes, roadmap
