@@ -7,6 +7,8 @@
 
 **Build in public.** MIT licensed. Core algorithms need only Python 3.8+ standard library.
 
+[![CI](https://github.com/simaqi123/fangyuan-yijing/actions/workflows/validate.yml/badge.svg)](https://github.com/simaqi123/fangyuan-yijing/actions/workflows/validate.yml)
+
 ---
 
 ## Why this exists
@@ -140,6 +142,8 @@ fangyuan-yijing/
 │   └── 先天方圆图交互可视化.html  Single-file interactive map (117 KB)
 ├── tools/zhouyi_verify.py      Cross-check harness vs an external ZHOUYI source
 ├── verify.py                   Zero-dependency self-check (run this first)
+├── .github/workflows/
+│   └── validate.yml            CI: self-check + artifact integrity on push/PR
 └── LICENSE                     MIT
 ```
 

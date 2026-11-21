@@ -1,0 +1,65 @@
+name: CI
+
+# Runs the zero-dependency structural self-check on every push and PR.
+# Any change that breaks the hexagram geometry or the SFT data format fails here.
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Self-check (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run structural self-check
+        run: python verify.py
+
+  artifacts:
+    name: Offline artifacts integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Verify the interactive map is a single self-contained file
+        run: |
+          set -eu
+          html="web/先天方圆图交互可视化.html"
+          test -s "$html"
+          bytes=$(wc -c < "$html")
+          echo "interactive map: $bytes bytes"
+          # It must open offline: no external scripts, stylesheets or images.
+          if grep -Eiq '(src|href)="https?://' "$html"; then
+            echo "FAIL: external resource reference found in $html" >&2
+            exit 1
+          fi
+          grep -q '<!DOCTYPE html>' "$html"
+          echo "OK: single self-contained HTML, no external dependencies"
+
+      - name: Verify required files are present
+        run: |
+          set -eu
+          for f in README.md LICENSE verify.py \
+                   core/gua64.py core/fangyuan.py core/xiangshu.py core/jieqi.py \
+                   data/sft_jingyi.jsonl data/axis1_train.jsonl; do
+            test -s "$f" || { echo "FAIL: missing or empty $f" >&2; exit 1; }
+          done
+          echo "OK: all required files present"
