@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[codz]
+*.so
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment / secrets
+.env
+*.pypirc
+
+# Local build & model artifacts (never commit large weights)
+*.safetensors
+*.bin
+*.gguf
+model/
+models/
+checkpoints/
+output/
+*_lora/
+
+# Local knowledge base / external reference repo (not part of this release)
+zhouyi-ref/
+*.db
+*_index/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# WorkBuddy internal
+.workbuddy/

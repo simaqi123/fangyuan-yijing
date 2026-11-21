@@ -1,0 +1,13 @@
+{
+  "dataset": "axis1_shuxue",
+  "version": "1.0",
+  "created": "2026-11-10",
+  "train": 7384,
+  "eval": 1650,
+  "template_isolation": "train=T1-T4, eval=T5",
+  "structural_isolation": "含 乾/坤/泰/否/既济/未济 的卦对整体入 eval",
+  "sha256": {
+    "axis1_train.jsonl": "3d4a322f4236d562a2111b12cd22d536c8a2a8f04b32f6f4302015c08719c372",
+    "axis1_eval.jsonl": "58ea662a4a0f4c75eebb2897a56bc3497fea7a8512d252aa364984771bb54b12"
+  }
+}
