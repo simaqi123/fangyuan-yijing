@@ -1,0 +1,54 @@
+name: Deploy visualization to GitHub Pages
+
+# Why this exists:
+# README calls web/先天方圆图交互可视化.html a "single-file interactive map you can
+# open offline" — but on github.com that link renders 117 KB of HTML source, not a
+# map. An offline-only artifact is a claim nobody can check in five seconds.
+# This publishes it as a real page.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble site
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          cp "web/先天方圆图交互可视化.html" _site/index.html
+          cp "web/先天方圆图交互可视化.html" _site/fangyuan.html
+          ls -la _site
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

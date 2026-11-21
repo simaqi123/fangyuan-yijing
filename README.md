@@ -9,6 +9,9 @@
 
 [![CI](https://github.com/simaqi123/fangyuan-yijing/actions/workflows/validate.yml/badge.svg)](https://github.com/simaqi123/fangyuan-yijing/actions/workflows/validate.yml)
 
+**[▶ Open the interactive Fang-Yuan map](https://simaqi123.github.io/fangyuan-yijing/)** — no install, no download, runs in the browser.
+Prefer offline? The same file is at [`web/先天方圆图交互可视化.html`](web/先天方圆图交互可视化.html) (single file, zero external requests).
+
 ---
 
 ## Why this exists
